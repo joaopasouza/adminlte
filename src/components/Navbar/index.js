@@ -1,8 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
+import { logout } from '../../store/actions/user';
 
 import avatar from '../../assets/images/user2-160x160.jpg';
 
-function Navbar(props) {
+function Navbar({ onLogout }) {
+    const doLogout = () => {
+        onLogout();
+    };
+
     return (
         <header className="main-header">
             <a href="#" className="logo">
@@ -54,7 +61,7 @@ function Navbar(props) {
                                         <a href="#" className="btn btn-default btn-flat">Perfil</a>
                                     </div>
                                     <div className="pull-right">
-                                        <a href="#" className="btn btn-default btn-flat">Sair</a>
+                                        <a href="#" className="btn btn-default btn-flat" onClick={doLogout}>Sair</a>
                                     </div>
                                 </li>
                             </ul>
@@ -66,5 +73,9 @@ function Navbar(props) {
     )
 }
 
-export default Navbar
+const mapDispatchToProps = dispatch => ({
+    onLogout: () => dispatch(logout())
+});
+
+export default connect(null, mapDispatchToProps)(Navbar);
 
