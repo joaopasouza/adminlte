@@ -1,39 +1,44 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function AuthView({ email, password, handleChangeEmail, handleChangePassword, doLogin }) {
-    return (
-        <div>
-            <h1>Entrar</h1>
+import Input from '../../components/generic/Input';
+import Button from '../../components/generic/Button';
 
-            <div>
-                <div className="form-group">
-                    <label className="sr-only" htmlFor="email">Email</label>
-                    <input
+import './styles.css';
+
+function AuthView({ email, password, emailFeedback, passwordFeedback, handleChangeEmail, handleChangePassword, doLogin }) {
+    return (
+        <div className="login-container">
+            <div className="login-content">
+                <form action="" className="login-form">
+                    <h2>Entrar</h2>
+                    <Input
+                        label=""
                         type="email"
-                        className="form-control"
                         name="email"
                         value={email}
                         placeholder="E-mail"
                         onChange={handleChangeEmail}
+                        description={emailFeedback}
                     />
-                </div>
 
-                <div className="form-group">
-                    <label className="sr-only" htmlFor="password">Senha</label>
-                    <input
+                    <Input
+                        label=""
                         type="password"
-                        className="form-control"
                         name="password"
                         value={password}
                         placeholder="Senha"
                         onChange={handleChangePassword}
+                        description={passwordFeedback}
                     />
-                </div>
 
-                <button type="button" className="btn btn-primary btn-block btn-flat" onClick={doLogin}>
-                    Entrar
-                </button>
+                    <Button
+                        label="Entrar"
+                        onClick={doLogin}
+                        block={true}
+                        flat={true}
+                    />
+                </form>
             </div>
         </div>
     );
@@ -42,6 +47,8 @@ function AuthView({ email, password, handleChangeEmail, handleChangePassword, do
 AuthView.propTypes = {
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
+    emailFeedback: PropTypes.string.isRequired,
+    passwordFeedback: PropTypes.string.isRequired,
     handleChangeEmail: PropTypes.func.isRequired,
     handleChangePassword: PropTypes.func.isRequired,
     doLogin: PropTypes.func.isRequired,
